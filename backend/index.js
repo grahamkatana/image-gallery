@@ -5,6 +5,9 @@ const PORT = process.env.PORT || 8000
 const app = express()
 const KEY = process.env.API_TOKEN
 const URL = `https://pixabay.com/api/?key=${KEY}`
+const cors = require('cors');
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.json({
@@ -17,6 +20,7 @@ app.get('/', (req, res) => {
 app.get('/images', (req, res) => {
     axios.get(URL).then(
         response => {
+            console.log(111);
             res.json(response.data.hits)
         }
     )
@@ -26,6 +30,7 @@ app.get('/images/:id', async (req, res) => {
     const id = req.params.id
     axios.get(`${URL}&id=${id}`).then(
         response => {
+            console.log(111);
             res.json(response.data.hits)
         }
     )
